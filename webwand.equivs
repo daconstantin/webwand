@@ -22,7 +22,7 @@ Depends: libxml2-utils
 # Readme: <README.Debian file; defaults to a generic one>
 # Extra-Files: <comma-separated list of additional files for the doc directory>
 # Links: <pair of space-separated paths; First is path symlink points at, second is filename of link>
-# Files: .jwmrc ~/.jwmrc
+Files: webwand /usr/bin
 Description: Site specific browser tool
  Creates profiles, configurations, desktop-files, downloads icons, etc. to automatically
  integrate a site specific browser to your desktop.
