@@ -1,0 +1,28 @@
+### Commented entries have reasonable defaults.
+### Uncomment to edit them.
+Source: webwand
+Section: misc
+Priority: optional
+# Homepage: <enter URL here; no default>
+Standards-Version: 3.9.2
+
+Package: webwand
+# Version: <enter version here; defaults to 1.0>
+Maintainer: "Joonas Sandelin" <daconstantinos@gmail.com>
+# Pre-Depends: <comma-separated list of packages>
+Depends: libxml2-utils
+# Recommends: <comma-separated list of packages>
+# Suggests: <comma-separated list of packages>
+# Provides: x-window-manager
+# Replaces: <comma-separated list of packages>
+# Architecture: all
+# Multi-Arch: <one of: foreign|same|allowed>
+# Copyright: <copyright file; defaults to GPL2>
+# Changelog: <changelog file; defaults to a generic changelog>
+# Readme: <README.Debian file; defaults to a generic one>
+# Extra-Files: <comma-separated list of additional files for the doc directory>
+# Links: <pair of space-separated paths; First is path symlink points at, second is filename of link>
+# Files: .jwmrc ~/.jwmrc
+Description: Site specific browser tool
+ Creates profiles, configurations, desktop-files, downloads icons, etc. to automatically
+ integrate a site specific browser to your desktop.
