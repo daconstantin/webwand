@@ -1,0 +1,32 @@
+#!/bin/bash
+#Usage: webwand_firefox $URL $APP_NAME
+#Uses html title if $APP_NAME not provided
+echo using installed Firefox with custom profile...
+# ADD A CHECK IF FIREFOX IS INSTALLED OR NOT!
+#
+##Check if url was passed from cli. Exit if not
+if [-z "$1"]; then
+  echo "No URL provided. Nothing to do."
+  exit 1
+fi
+
+indexfile=$(wget -qO- $1) #Download html
+header=$(tidy -asxml -q <(echo $indexfile) | grep -Pizo '(?s)<head>.*?</head>') #get the header
+
+## Check if name of the app was provided in cli. 
+## If not, use the title from the header
+
+if [-z "$2"]; then
+  app_name=$(grep -i '<title>.*</title>' <<<$header | sed 's/<title>//gi' | sed 's/<\/title>//gi')
+else
+  app_name=$2
+fi
+echo "Creating a launcher for "$1 " with a local name of "$app_name
+
+
+
+
+  
+		cp -r $HOME/.webwand/firefox_profiles/default $HOME/.webwand/firefox_profiles/$3
+		echo "user_pref(\"browser.startup.homepage\", \"https://youtube.com\");" >> ~/.webwand/firefox_profiles/$3/user.js
+		
