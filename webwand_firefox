@@ -1,17 +1,30 @@
 #!/bin/bash
-#Usage: webwand_firefox $URL $APP_NAME
+#Usage: webwand_firefox $URL $APP_NAME 
 #Uses html title if $APP_NAME not provided
 echo using installed Firefox with custom profile...
 # ADD A CHECK IF FIREFOX IS INSTALLED OR NOT!
 #
 ##Check if url was passed from cli. Exit if not
-if [-z "$1"]; then
+if [ ! -z $1 ]; then
   echo "No URL provided. Nothing to do."
   exit 1
 fi
 
-indexfile=$(wget -qO- $1) #Download html
-header=$(tidy -asxml -q <(echo $indexfile) | grep -Pizo '(?s)<head>.*?</head>') #get the header
+#Create local icon folder if missing
+if [ ! -d "$HOME/.icons" ]; then
+	mkdir -r "$HOME/.icons"
+fi
+#Create local bin folder if missing
+if [ ! -d "$HOME/.local/share/bin" ]; then
+	mkdir -r "$HOME/.local/share/bin"
+fi
+
+## ADD DIRECTORIES TO $PATH ETC, SO THEY WORK!
+
+rm /tmp/webwand 		#Remove old /tmp/webwand
+wget -q -O /tmp/webwand "$1" 	#wget index from site. Convert encoding to one used locally
+encod=$(file --mime-encoding --brief /tmp/webwand)
+iconv -f $encod -t $(locale charmap) /tmp/webwand -o /tmp/webwand
 
 ## Check if name of the app was provided in cli. 
 ## If not, use the title from the header
@@ -21,12 +34,13 @@ if [-z "$2"]; then
 else
   app_name=$2
 fi
-echo "Creating a launcher for "$1 " with a local name of "$app_name
+#Remove http:// and https:// from $URL(1$) if any
+siteurl=$(echo $1 | sed 's/http\:\/\///g' | sed 's/https\:\/\///g') 
 
+echo "Creating custom profiles..."
+cp -r $HOME/.webwand/firefox_profiles/default $HOME/.webwand/firefox_profiles/$app_name
+echo "user_pref(\"browser.startup.homepage\", \"https://"$siteurl"\");" >> $HOME/.webwand/firefox_profiles/$app_name/user.js
 
+	echo "Creating a launcher for "$1 " with a local name of "$app_name
 
-
-  
-		cp -r $HOME/.webwand/firefox_profiles/default $HOME/.webwand/firefox_profiles/$3
-		echo "user_pref(\"browser.startup.homepage\", \"https://youtube.com\");" >> ~/.webwand/firefox_profiles/$3/user.js
-		
+wget -q -O $HOME/.icons/"$app_name".ico" "https://"$siteurl/favicon.ico
