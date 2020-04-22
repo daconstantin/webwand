@@ -10,7 +10,7 @@ Package: webwand
 # Version: <enter version here; defaults to 1.0>
 Maintainer: "Joonas Sandelin" <daconstantinos@gmail.com>
 # Pre-Depends: <comma-separated list of packages>
-Depends: libxml2-utils
+Depends: libxml2-utils,tidy
 # Recommends: <comma-separated list of packages>
 # Suggests: <comma-separated list of packages>
 # Provides: x-window-manager
