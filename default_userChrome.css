@@ -1,3 +1,10 @@
+/* (Source: http://www.famlehm.de/deleteme/tychobarfy/moz/index_en.html)*/
+/* Must be written into userChrome.css */
+/* Search box at top right corner with custom width */
+#search-container, #searchbar {
+   -moz-box-flex: 230 !important;
+    }
+
 /*(Original source: https://pastebin.com/Gim2F9Wh)
 
 Please note that names of selectors are case sensitive, please note that some context menu items use an underscore instead of a dash.
@@ -8,7 +15,7 @@ In order to remove context menu items start the userChrome CSS file with the @na
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 /*Removes Items from Tab Context Menu*/
 #context_reloadTab,
-#context_toggleMuteTab,
+context_toggleMuteTab,
 #context_pinTab,
 #context_unpinTab,
 #context_duplicateTab,
